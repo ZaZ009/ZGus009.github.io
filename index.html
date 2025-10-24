@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher or Lower: Album Ratings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #121212;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: #181818;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 1000px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #1DB954;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .score-item {
+            font-size: 1.1em;
+        }
+
+        .score-item strong {
+            font-size: 1.3em;
+        }
+
+        .game-board {
+            display: flex;
+            min-height: 500px;
+        }
+
+        .album-card {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .current-album {
+            background: #282828;
+            border-right: 3px solid #1DB954;
+        }
+
+        .next-album {
+            background: #282828;
+        }
+
+        .album-cover {
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .album-cover:hover {
+            transform: scale(1.05);
+        }
+
+        .album-info {
+            text-align: center;
+            max-width: 250px;
+        }
+
+        .album-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #FFFFFF;
+        }
+
+        .album-artist {
+            font-size: 1.1em;
+            color: #B3B3B3;
+            margin-bottom: 15px;
+        }
+
+        .album-rating {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1DB954;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .rating-hidden {
+            font-size: 3em;
+            color: #ccc;
+        }
+
+        .vs-divider {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #1DB954;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .game-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .higher-btn {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .higher-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .lower-btn {
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+            color: white;
+        }
+
+        .lower-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .result-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            animation: scaleIn 0.3s ease;
+        }
+
+        .result-box h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .correct {
+            color: #38ef7d;
+        }
+
+        .incorrect {
+            color: #ee0979;
+        }
+
+        .play-again-btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #1DB954;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .play-again-btn:hover {
+            background: #1ed760;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .game-board {
+                flex-direction: column;
+            }
+
+            .current-album {
+                border-right: none;
+                border-bottom: 3px solid #1DB954;
+            }
+
+            .vs-divider {
+                left: 50%;
+                top: 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>🎵 Higher or Lower: Album Ratings</h1>
+            <div class="score-board">
+                <div class="score-item">Score: <strong id="score">0</strong></div>
+                <div class="score-item">Streak: <strong id="streak">0</strong></div>
+                <div class="score-item">Best: <strong id="highscore">0</strong></div>
+            </div>
+        </div>
+
+        <div class="game-board">
+            <div class="album-card current-album">
+                <img id="currentCover" class="album-cover" src="" alt="Album Cover">
+                <div class="album-info">
+                    <div id="currentTitle" class="album-title"></div>
+                    <div id="currentArtist" class="album-artist"></div>
+                    <div id="currentRating" class="album-rating"></div>
+                </div>
+            </div>
+
+            <div class="vs-divider">VS</div>
+
+            <div class="album-card next-album">
+                <img id="nextCover" class="album-cover" src="" alt="Album Cover">
+                <div class="album-info">
+                    <div id="nextTitle" class="album-title"></div>
+                    <div id="nextArtist" class="album-artist"></div>
+                    <div id="nextRating" class="rating-hidden">?</div>
+                </div>
+                <div class="button-container">
+                    <button class="game-btn higher-btn" onclick="makeGuess('higher')">⬆️ Higher</button>
+                    <button class="game-btn lower-btn" onclick="makeGuess('lower')">⬇️ Lower</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 20px; color: white; font-size: 0.9em;">
+        Made By Zachary
+    </div>
+
+    <div id="resultOverlay" class="result-overlay">
+        <div class="result-box">
+            <h2 id="resultText"></h2>
+            <p id="resultDetails" style="font-size: 1.2em; margin: 20px 0;"></p>
+            <button class="play-again-btn" onclick="hideResult()">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        const albums = [
+            { title: "Blonde", artist: "Frank Ocean", rating: 9.2, color: "linear-gradient(135deg, #FFA500, #FF8C00)" },
+            { title: "To Pimp a Butterfly", artist: "Kendrick Lamar", rating: 9.5, color: "linear-gradient(135deg, #000000, #4A4A4A)" },
+            { title: "Graduation", artist: "Kanye West", rating: 8.5, color: "linear-gradient(135deg, #8B4789, #FF69B4)" },
+            { title: "Igor", artist: "Tyler, The Creator", rating: 8.8, color: "linear-gradient(135deg, #FFB6C1, #FF69B4)" },
+            { title: "Good Kid, M.A.A.D City", artist: "Kendrick Lamar", rating: 9.0, color: "linear-gradient(135deg, #1E3A8A, #3B82F6)" },
+            { title: "Flower Boy", artist: "Tyler, The Creator", rating: 8.7, color: "linear-gradient(135deg, #FFD700, #98D8C8)" },
+            { title: "Swimming", artist: "Mac Miller", rating: 8.4, color: "linear-gradient(135deg, #4682B4, #87CEEB)" },
+            { title: "2014 Forest Hills Drive", artist: "J. Cole", rating: 7.9, color: "linear-gradient(135deg, #228B22, #90EE90)" },
+            { title: "Ctrl", artist: "SZA", rating: 8.6, color: "linear-gradient(135deg, #8B4513, #D2691E)" },
+            { title: "Because the Internet", artist: "Childish Gambino", rating: 8.2, color: "linear-gradient(135deg, #2F4F4F, #708090)" },
+            { title: "Channel Orange", artist: "Frank Ocean", rating: 9.1, color: "linear-gradient(135deg, #FF6347, #FF8C00)" },
+            { title: "Random Access Memories", artist: "Daft Punk", rating: 8.8, color: "linear-gradient(135deg, #FFD700, #FFA500)" },
+            { title: "Discovery", artist: "Daft Punk", rating: 9.2, color: "linear-gradient(135deg, #4169E1, #00BFFF)" },
+            { title: "Demon Days", artist: "Gorillaz", rating: 8.7, color: "linear-gradient(135deg, #8B0000, #FF4500)" },
+            { title: "Plastic Beach", artist: "Gorillaz", rating: 8.3, color: "linear-gradient(135deg, #20B2AA, #00CED1)" },
+            { title: "3 Feet High and Rising", artist: "De La Soul", rating: 9.0, color: "linear-gradient(135deg, #FF1493, #FFD700)" },
+            { title: "OK Computer", artist: "Radiohead", rating: 9.7, color: "linear-gradient(135deg, #4682B4, #5F9EA0)" },
+            { title: "Kid A", artist: "Radiohead", rating: 9.4, color: "linear-gradient(135deg, #DC143C, #8B0000)" },
+            { title: "In Rainbows", artist: "Radiohead", rating: 9.3, color: "linear-gradient(135deg, #9370DB, #BA55D3)" }
+        ];
+
+        let score = 0;
+        let streak = 0;
+        let highscore = localStorage.getItem('highscore') || 0;
+        let currentAlbum, nextAlbum;
+        let availableAlbums = [];
+
+        const correctSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZUQ0PVKzl8bllHgU9k9n0yoA0Bx5rvu3mnFMNEFCq5PHAZiQGO5HY88J/MgYebL3v6qFVDhJTrOXxv2kjBz2S2/TGgDMHIG2+7+mjVg4TU63l8L5qJAc7k9nzxYA0Bx5tv+zoolUNElKs5fC+aiQGPJLZ88WAMwcfbb7v6KNVDhJTrefwvmkkBjuS2fPFgDMHH22+7+mjVQ0SUqzl8L1qJAY8ktryw4AyBx5tv+/po1YOEFOO/');
+
+        const incorrectSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZUQ0PVKzl8bllHgU9k9n0yoA0Bx5rvu3mnFMNEFCq5PHAZiQGO5HY88J/MgYebL3v6qFVDhJTrOXxv2kjBz2S2/TGgDMHIG2+7+mjVg4TU63l8L5qJAc7k9nzxYA0Bx5tv+zoolUNElKs5fC+aiQGPJLZ88WAMwcfbb7v6KNVDhJTrefwvmkkBjuS2fPFgDMHH22+7+mjVQ0SUqzl8L1qJAY8ktryw4AyBx5tv+/po1YOEFOO/');
+
+        document.getElementById('highscore').textContent = highscore;
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initGame() {
+            availableAlbums = shuffleArray(albums);
+            currentAlbum = availableAlbums.pop();
+            nextAlbum = availableAlbums.pop();
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            document.getElementById('currentCover').style.background = currentAlbum.color;
+            document.getElementById('currentCover').removeAttribute('src');
+            document.getElementById('currentTitle').textContent = currentAlbum.title;
+            document.getElementById('currentArtist').textContent = currentAlbum.artist;
+            document.getElementById('currentRating').textContent = currentAlbum.rating.toFixed(1);
+
+            document.getElementById('nextCover').style.background = nextAlbum.color;
+            document.getElementById('nextCover').removeAttribute('src');
+            document.getElementById('nextTitle').textContent = nextAlbum.title;
+            document.getElementById('nextArtist').textContent = nextAlbum.artist;
+            document.getElementById('nextRating').textContent = '?';
+            document.getElementById('nextRating').className = 'rating-hidden';
+
+            document.getElementById('score').textContent = score;
+            document.getElementById('streak').textContent = streak;
+        }
+
+        function makeGuess(guess) {
+            const isHigher = nextAlbum.rating > currentAlbum.rating;
+            const isCorrect = (guess === 'higher' && isHigher) || (guess === 'lower' && !isHigher);
+
+            document.getElementById('nextRating').textContent = nextAlbum.rating.toFixed(1);
+            document.getElementById('nextRating').className = 'album-rating';
+
+            const overlay = document.getElementById('resultOverlay');
+            const resultText = document.getElementById('resultText');
+            const resultDetails = document.getElementById('resultDetails');
+
+            if (isCorrect) {
+                correctSound.play();
+                score++;
+                streak++;
+                resultText.textContent = '✅ Correct!';
+                resultText.className = 'correct';
+                resultDetails.textContent = `${nextAlbum.title} is rated ${nextAlbum.rating.toFixed(1)}`;
+                
+                if (score > highscore) {
+                    highscore = score;
+                    localStorage.setItem('highscore', highscore);
+                    document.getElementById('highscore').textContent = highscore;
+                }
+            } else {
+                incorrectSound.play();
+                streak = 0;
+                resultText.textContent = '❌ Wrong!';
+                resultText.className = 'incorrect';
+                resultDetails.textContent = `${nextAlbum.title} is rated ${nextAlbum.rating.toFixed(1)}`;
+                document.querySelector('.next-album').classList.add('shake');
+                setTimeout(() => {
+                    document.querySelector('.next-album').classList.remove('shake');
+                }, 500);
+            }
+
+            overlay.style.display = 'flex';
+        }
+
+        function hideResult() {
+            document.getElementById('resultOverlay').style.display = 'none';
+            
+            if (availableAlbums.length === 0) {
+                availableAlbums = shuffleArray(albums);
+            }
+            
+            currentAlbum = nextAlbum;
+            nextAlbum = availableAlbums.pop();
+            updateDisplay();
+        }
+
+        initGame();
+    </script>
+</body>
+</html>
