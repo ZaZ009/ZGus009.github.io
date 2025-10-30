@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Higher or Lower: Album Ratings</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #121212;
@@ -16,6 +21,7 @@
       padding: 20px;
       flex-direction: column;
     }
+
     .game-container {
       background: #181818;
       border-radius: 20px;
@@ -24,13 +30,40 @@
       width: 100%;
       overflow: hidden;
     }
+
     .header {
       background: #1DB954;
       color: white;
       padding: 25px;
       text-align: center;
     }
-    .game-board { display: flex; min-height: 500px; }
+
+    .header h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+    }
+
+    .score-board {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 15px;
+    }
+
+    .score-item {
+      font-size: 1.1em;
+    }
+
+    .score-item strong {
+      font-size: 1.3em;
+    }
+
+    .game-board {
+      display: flex;
+      min-height: 500px;
+      position: relative;
+    }
+
     .album-card {
       flex: 1;
       padding: 40px;
@@ -38,184 +71,71 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
       transition: all 0.3s ease;
     }
-    .current-album { background: #282828; border-right: 3px solid #1DB954; }
-    .next-album { background: #282828; }
+
+    .current-album {
+      background: #282828;
+      border-right: 3px solid #1DB954;
+    }
+
+    .next-album {
+      background: #282828;
+    }
+
     .album-cover {
-      width: 200px; height: 200px;
+      width: 160px; /* smaller */
+      height: 160px; /* smaller */
       border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       margin-bottom: 20px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      position: relative;
       background-size: cover;
       background-position: center;
     }
-    .album-title { font-size: 1.5em; font-weight: bold; color: white; margin-bottom: 8px; }
-    .album-artist { font-size: 1.1em; color: #B3B3B3; margin-bottom: 15px; }
-    .album-rating { font-size: 2.5em; font-weight: bold; color: #1DB954; }
-    .rating-hidden { font-size: 3em; color: #ccc; }
-    .button-container { display: flex; gap: 15px; margin-top: 30px; }
-    .game-btn {
-      padding: 15px 40px; font-size: 1.2em; font-weight: bold;
-      border: none; border-radius: 50px; cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .higher-btn { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; }
-    .lower-btn { background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%); color: white; }
-    .vs-divider {
-      position: absolute; left: 50%; top: 50%;
-      transform: translate(-50%, -50%);
-      background: #1DB954; width: 60px; height: 60px;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: 1.5em; font-weight: bold; color: white;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    }
-    #loadingMessage { color: white; margin-top: 10px; display: none; }
-  </style>
-</head>
-<body>
-  <div class="game-container">
-    <div class="header">
-      <h1>🎵 Higher or Lower: Album Ratings</h1>
-    </div>
 
-    <div class="game-board">
-      <div class="album-card current-album">
-        <div id="currentCover" class="album-cover"></div>
-        <div class="album-info">
-          <div id="currentTitle" class="album-title"></div>
-          <div id="currentArtist" class="album-artist"></div>
-          <div id="currentRating" class="album-rating"></div>
-        </div>
-      </div>
-
-      <div class="vs-divider">VS</div>
-
-      <div class="album-card next-album">
-        <div id="nextCover" class="album-cover"></div>
-        <div class="album-info">
-          <div id="nextTitle" class="album-title"></div>
-          <div id="nextArtist" class="album-artist"></div>
-          <div id="nextRating" class="rating-hidden">?</div>
-        </div>
-        <div class="button-container">
-          <button class="game-btn higher-btn" onclick="makeGuess('higher')">⬆️ Higher</button>
-          <button class="game-btn lower-btn" onclick="makeGuess('lower')">⬇️ Lower</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div style="text-align:center; margin-top:20px;">
-    <button onclick="loadAllArtwork()">🎨 Fetch Album Covers</button>
-    <div id="loadingMessage">⏳ Fetching album covers, please wait...</div>
-  </div>
-
-  <script>
-    const albums = [
-      { title: "Blonde", artist: "Frank Ocean", rating: 9.2 },
-      { title: "To Pimp a Butterfly", artist: "Kendrick Lamar", rating: 9.5 },
-      { title: "Graduation", artist: "Kanye West", rating: 8.5 },
-      { title: "Igor", artist: "Tyler, The Creator", rating: 8.8 },
-      { title: "Good Kid, M.A.A.D City", artist: "Kendrick Lamar", rating: 9.0 },
-      { title: "Ctrl", artist: "SZA", rating: 8.6 },
-      { title: "Swimming", artist: "Mac Miller", rating: 8.4 },
-      { title: "In Rainbows", artist: "Radiohead", rating: 9.3 }
-    ];
-
-    let currentAlbum, nextAlbum, availableAlbums = [];
-    let artworkLoaded = false;
-
-    async function fetchAlbumArtwork(artist, album) {
-      try {
-        const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artist + ' ' + album)}&entity=album&limit=1`);
-        const data = await response.json();
-        if (data.results.length > 0) {
-          return data.results[0].artworkUrl100.replace('100x100', '600x600');
-        }
-      } catch (err) {
-        console.error("Error fetching artwork:", err);
-      }
-      return null;
+    .album-cover:hover {
+      transform: scale(1.05);
     }
 
-    async function loadAllArtwork() {
-      const loadingMessage = document.getElementById('loadingMessage');
-      loadingMessage.style.display = 'block';
-      loadingMessage.textContent = "⏳ Fetching album covers, please wait...";
-
-      try {
-        const promises = albums.map(async (album) => {
-          album.artwork = await fetchAlbumArtwork(album.artist, album.title);
-        });
-
-        await Promise.all(promises);
-        artworkLoaded = true;
-        loadingMessage.textContent = "✅ All album covers loaded!";
-        setTimeout(() => (loadingMessage.style.display = 'none'), 2000);
-        updateDisplay();
-      } catch (error) {
-        loadingMessage.textContent = "❌ Error loading covers. Try again.";
-      }
+    .album-cover::after {
+      content: '🎵 Listen on Spotify';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(29, 185, 84, 0.95);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.9em;
+      border-radius: 15px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    function shuffleArray(array) {
-      const shuffled = [...array];
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      return shuffled;
+    .album-cover:hover::after {
+      opacity: 1;
     }
 
-    function initGame() {
-      availableAlbums = shuffleArray(albums);
-      currentAlbum = availableAlbums.pop();
-      nextAlbum = availableAlbums.pop();
-      updateDisplay();
+    .album-info {
+      text-align: center;
+      max-width: 250px;
     }
 
-    function updateDisplay() {
-      const currentCover = document.getElementById('currentCover');
-      const nextCover = document.getElementById('nextCover');
-
-      if (currentAlbum.artwork) {
-        currentCover.style.backgroundImage = `url(${currentAlbum.artwork})`;
-      } else {
-        currentCover.style.background = "#333";
-      }
-
-      if (nextAlbum.artwork) {
-        nextCover.style.backgroundImage = `url(${nextAlbum.artwork})`;
-      } else {
-        nextCover.style.background = "#333";
-      }
-
-      document.getElementById('currentTitle').textContent = currentAlbum.title;
-      document.getElementById('currentArtist').textContent = currentAlbum.artist;
-      document.getElementById('currentRating').textContent = currentAlbum.rating.toFixed(1);
-
-      document.getElementById('nextTitle').textContent = nextAlbum.title;
-      document.getElementById('nextArtist').textContent = nextAlbum.artist;
-      document.getElementById('nextRating').textContent = '?';
-      document.getElementById('nextRating').className = 'rating-hidden';
+    .album-title {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #FFFFFF;
     }
 
-    function makeGuess(guess) {
-      const isHigher = nextAlbum.rating > currentAlbum.rating;
-      const isCorrect = (guess === 'higher' && isHigher) || (guess === 'lower' && !isHigher);
-
-      document.getElementById('nextRating').textContent = nextAlbum.rating.toFixed(1);
-      document.getElementById('nextRating').className = 'album-rating';
-
-      alert(isCorrect ? "✅ Correct!" : "❌ Wrong!");
-
-      currentAlbum = nextAlbum;
-      nextAlbum = availableAlbums.pop() || shuffleArray(albums).pop();
-      updateDisplay();
-    }
-
-    initGame();
-  </script>
-</body>
-</html>
+    .album-artist {
+      font-size: 1em;
+      color: #B3B3B3;
+      margin-bottom: 15
