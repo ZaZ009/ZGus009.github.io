@@ -386,11 +386,14 @@
 
         async function fetchAlbumArtwork(artist, album) {
             try {
-                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artist + ' ' + album)}&entity=album&limit=1`);
+                // Using Last.fm API (no key required for album.getInfo)
+                const response = await fetch(`https://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=8d7503fded4e1d6933de0e0b1e6f5a1f&artist=${encodeURIComponent(artist)}&album=${encodeURIComponent(album)}&format=json`);
                 const data = await response.json();
-                if (data.results.length > 0) {
-                    // Get high quality artwork (600x600)
-                    return data.results[0].artworkUrl100.replace('100x100', '600x600');
+                if (data.album && data.album.image) {
+                    // Get the largest image (index 3 or 4)
+                    const images = data.album.image;
+                    const largeImage = images[images.length - 1]['#text'] || images[images.length - 2]['#text'];
+                    return largeImage;
                 }
             } catch (error) {
                 console.error('Error fetching artwork:', error);
@@ -399,11 +402,16 @@
         }
 
         async function loadAllArtwork() {
+            console.log('Starting to load artwork...');
             const promises = albums.map(async (album) => {
-                album.artwork = await fetchAlbumArtwork(album.artist, album.title);
+                const artwork = await fetchAlbumArtwork(album.artist, album.title);
+                album.artwork = artwork;
+                console.log(`Loaded ${album.title}: ${artwork ? 'success' : 'failed'}`);
             });
             await Promise.all(promises);
             artworkLoaded = true;
+            console.log('All artwork loaded, updating display...');
+            updateDisplay(); // Refresh display after artwork loads
         }
 
         function shuffleArray(array) {
