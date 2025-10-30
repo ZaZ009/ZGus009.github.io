@@ -89,10 +89,35 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
             transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
         }
 
         .album-cover:hover {
             transform: scale(1.05);
+        }
+
+        .album-cover::after {
+            content: '🎵 Listen on Spotify';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(29, 185, 84, 0.95);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .album-cover:hover::after {
+            opacity: 1;
         }
 
         .album-info {
@@ -282,7 +307,7 @@
 
         <div class="game-board">
             <div class="album-card current-album">
-                <img id="currentCover" class="album-cover" src="" alt="Album Cover">
+                <div id="currentCover" class="album-cover" onclick="openSpotify(currentAlbum.spotifyUrl)"></div>
                 <div class="album-info">
                     <div id="currentTitle" class="album-title"></div>
                     <div id="currentArtist" class="album-artist"></div>
@@ -293,7 +318,7 @@
             <div class="vs-divider">VS</div>
 
             <div class="album-card next-album">
-                <img id="nextCover" class="album-cover" src="" alt="Album Cover">
+                <div id="nextCover" class="album-cover" onclick="openSpotify(nextAlbum.spotifyUrl)"></div>
                 <div class="album-info">
                     <div id="nextTitle" class="album-title"></div>
                     <div id="nextArtist" class="album-artist"></div>
@@ -321,25 +346,25 @@
 
     <script>
         const albums = [
-            { title: "Blonde", artist: "Frank Ocean", rating: 9.2, color: "linear-gradient(135deg, #FFA500, #FF8C00)" },
-            { title: "To Pimp a Butterfly", artist: "Kendrick Lamar", rating: 9.5, color: "linear-gradient(135deg, #000000, #4A4A4A)" },
-            { title: "Graduation", artist: "Kanye West", rating: 8.5, color: "linear-gradient(135deg, #8B4789, #FF69B4)" },
-            { title: "Igor", artist: "Tyler, The Creator", rating: 8.8, color: "linear-gradient(135deg, #FFB6C1, #FF69B4)" },
-            { title: "Good Kid, M.A.A.D City", artist: "Kendrick Lamar", rating: 9.0, color: "linear-gradient(135deg, #1E3A8A, #3B82F6)" },
-            { title: "Flower Boy", artist: "Tyler, The Creator", rating: 8.7, color: "linear-gradient(135deg, #FFD700, #98D8C8)" },
-            { title: "Swimming", artist: "Mac Miller", rating: 8.4, color: "linear-gradient(135deg, #4682B4, #87CEEB)" },
-            { title: "2014 Forest Hills Drive", artist: "J. Cole", rating: 7.9, color: "linear-gradient(135deg, #228B22, #90EE90)" },
-            { title: "Ctrl", artist: "SZA", rating: 8.6, color: "linear-gradient(135deg, #8B4513, #D2691E)" },
-            { title: "Because the Internet", artist: "Childish Gambino", rating: 8.2, color: "linear-gradient(135deg, #2F4F4F, #708090)" },
-            { title: "Channel Orange", artist: "Frank Ocean", rating: 9.1, color: "linear-gradient(135deg, #FF6347, #FF8C00)" },
-            { title: "Random Access Memories", artist: "Daft Punk", rating: 8.8, color: "linear-gradient(135deg, #FFD700, #FFA500)" },
-            { title: "Discovery", artist: "Daft Punk", rating: 9.2, color: "linear-gradient(135deg, #4169E1, #00BFFF)" },
-            { title: "Demon Days", artist: "Gorillaz", rating: 8.7, color: "linear-gradient(135deg, #8B0000, #FF4500)" },
-            { title: "Plastic Beach", artist: "Gorillaz", rating: 8.3, color: "linear-gradient(135deg, #20B2AA, #00CED1)" },
-            { title: "3 Feet High and Rising", artist: "De La Soul", rating: 9.0, color: "linear-gradient(135deg, #FF1493, #FFD700)" },
-            { title: "OK Computer", artist: "Radiohead", rating: 9.7, color: "linear-gradient(135deg, #4682B4, #5F9EA0)" },
-            { title: "Kid A", artist: "Radiohead", rating: 9.4, color: "linear-gradient(135deg, #DC143C, #8B0000)" },
-            { title: "In Rainbows", artist: "Radiohead", rating: 9.3, color: "linear-gradient(135deg, #9370DB, #BA55D3)" }
+            { title: "Blonde", artist: "Frank Ocean", rating: 9.2, color: "linear-gradient(135deg, #FFA500, #FF8C00)", artwork: null, spotifyUrl: "https://open.spotify.com/album/3mH6qwIy9crq0I9YQbOuDf" },
+            { title: "To Pimp a Butterfly", artist: "Kendrick Lamar", rating: 9.5, color: "linear-gradient(135deg, #000000, #4A4A4A)", artwork: null, spotifyUrl: "https://open.spotify.com/album/7ycBtnsMtyVbbwTfJwRjSP" },
+            { title: "Graduation", artist: "Kanye West", rating: 8.5, color: "linear-gradient(135deg, #8B4789, #FF69B4)", artwork: null, spotifyUrl: "https://open.spotify.com/album/5fZOuABkbcmWMBsba5Q90" },
+            { title: "Igor", artist: "Tyler, The Creator", rating: 8.8, color: "linear-gradient(135deg, #FFB6C1, #FF69B4)", artwork: null, spotifyUrl: "https://open.spotify.com/album/5zi7WsKlIiUXv09tbGLKsE" },
+            { title: "Good Kid, M.A.A.D City", artist: "Kendrick Lamar", rating: 9.0, color: "linear-gradient(135deg, #1E3A8A, #3B82F6)", artwork: null, spotifyUrl: "https://open.spotify.com/album/3DGQ1iZ9XKUQxAUWjfC34w" },
+            { title: "Flower Boy", artist: "Tyler, The Creator", rating: 8.7, color: "linear-gradient(135deg, #FFD700, #98D8C8)", artwork: null, spotifyUrl: "https://open.spotify.com/album/2PQZhPrOIzKglRIJYLr3Cg" },
+            { title: "Swimming", artist: "Mac Miller", rating: 8.4, color: "linear-gradient(135deg, #4682B4, #87CEEB)", artwork: null, spotifyUrl: "https://open.spotify.com/album/5wtE5aLX5r7jOosmPhJhhk" },
+            { title: "2014 Forest Hills Drive", artist: "J. Cole", rating: 7.9, color: "linear-gradient(135deg, #228B22, #90EE90)", artwork: null, spotifyUrl: "https://open.spotify.com/album/7viNUmZZ8ztn2UB4XB3jIL" },
+            { title: "Ctrl", artist: "SZA", rating: 8.6, color: "linear-gradient(135deg, #8B4513, #D2691E)", artwork: null, spotifyUrl: "https://open.spotify.com/album/76xVfYf4CmKLUavYHkx25D" },
+            { title: "Because the Internet", artist: "Childish Gambino", rating: 8.2, color: "linear-gradient(135deg, #2F4F4F, #708090)", artwork: null, spotifyUrl: "https://open.spotify.com/album/5dtCXtlP8JQJFKfXbDJXHf" },
+            { title: "Channel Orange", artist: "Frank Ocean", rating: 9.1, color: "linear-gradient(135deg, #FF6347, #FF8C00)", artwork: null, spotifyUrl: "https://open.spotify.com/album/392p3shh2jkxUxY2VHvlH8" },
+            { title: "Random Access Memories", artist: "Daft Punk", rating: 8.8, color: "linear-gradient(135deg, #FFD700, #FFA500)", artwork: null, spotifyUrl: "https://open.spotify.com/album/4m2880jivSbbyEGAKfITCa" },
+            { title: "Discovery", artist: "Daft Punk", rating: 9.2, color: "linear-gradient(135deg, #4169E1, #00BFFF)", artwork: null, spotifyUrl: "https://open.spotify.com/album/2noRn2Aes5aoNVsU6iWThc" },
+            { title: "Demon Days", artist: "Gorillaz", rating: 8.7, color: "linear-gradient(135deg, #8B0000, #FF4500)", artwork: null, spotifyUrl: "https://open.spotify.com/album/0bUTHlWbkSQysoM3VsWldT" },
+            { title: "Plastic Beach", artist: "Gorillaz", rating: 8.3, color: "linear-gradient(135deg, #20B2AA, #00CED1)", artwork: null, spotifyUrl: "https://open.spotify.com/album/2dIGnmEIy1WZIcZCFSj6i8" },
+            { title: "3 Feet High and Rising", artist: "De La Soul", rating: 9.0, color: "linear-gradient(135deg, #FF1493, #FFD700)", artwork: null, spotifyUrl: "https://open.spotify.com/album/5yb8oAVobIgni0p5aIMbWW" },
+            { title: "OK Computer", artist: "Radiohead", rating: 9.7, color: "linear-gradient(135deg, #4682B4, #5F9EA0)", artwork: null, spotifyUrl: "https://open.spotify.com/album/6dVIqQ8qmQ5GBnJ9shOYGE" },
+            { title: "Kid A", artist: "Radiohead", rating: 9.4, color: "linear-gradient(135deg, #DC143C, #8B0000)", artwork: null, spotifyUrl: "https://open.spotify.com/album/6GjwtEZcfenmOf6l18N7T7" },
+            { title: "In Rainbows", artist: "Radiohead", rating: 9.3, color: "linear-gradient(135deg, #9370DB, #BA55D3)", artwork: null, spotifyUrl: "https://open.spotify.com/album/5vkqYmiPBYLaalcmjujWxK" }
         ];
 
         let score = 0;
@@ -347,12 +372,39 @@
         let highscore = localStorage.getItem('highscore') || 0;
         let currentAlbum, nextAlbum;
         let availableAlbums = [];
+        let artworkLoaded = false;
 
         const correctSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZUQ0PVKzl8bllHgU9k9n0yoA0Bx5rvu3mnFMNEFCq5PHAZiQGO5HY88J/MgYebL3v6qFVDhJTrOXxv2kjBz2S2/TGgDMHIG2+7+mjVg4TU63l8L5qJAc7k9nzxYA0Bx5tv+zoolUNElKs5fC+aiQGPJLZ88WAMwcfbb7v6KNVDhJTrefwvmkkBjuS2fPFgDMHH22+7+mjVQ0SUqzl8L1qJAY8ktryw4AyBx5tv+/po1YOEFOO/');
 
         const incorrectSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZUQ0PVKzl8bllHgU9k9n0yoA0Bx5rvu3mnFMNEFCq5PHAZiQGO5HY88J/MgYebL3v6qFVDhJTrOXxv2kjBz2S2/TGgDMHIG2+7+mjVg4TU63l8L5qJAc7k9nzxYA0Bx5tv+zoolUNElKs5fC+aiQGPJLZ88WAMwcfbb7v6KNVDhJTrefwvmkkBjuS2fPFgDMHH22+7+mjVQ0SUqzl8L1qJAY8ktryw4AyBx5tv+/po1YOEFOO/');
 
         document.getElementById('highscore').textContent = highscore;
+
+        function openSpotify(url) {
+            window.open(url, '_blank');
+        }
+
+        async function fetchAlbumArtwork(artist, album) {
+            try {
+                const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artist + ' ' + album)}&entity=album&limit=1`);
+                const data = await response.json();
+                if (data.results.length > 0) {
+                    // Get high quality artwork (600x600)
+                    return data.results[0].artworkUrl100.replace('100x100', '600x600');
+                }
+            } catch (error) {
+                console.error('Error fetching artwork:', error);
+            }
+            return null;
+        }
+
+        async function loadAllArtwork() {
+            const promises = albums.map(async (album) => {
+                album.artwork = await fetchAlbumArtwork(album.artist, album.title);
+            });
+            await Promise.all(promises);
+            artworkLoaded = true;
+        }
 
         function shuffleArray(array) {
             const shuffled = [...array];
@@ -371,14 +423,29 @@
         }
 
         function updateDisplay() {
-            document.getElementById('currentCover').style.background = currentAlbum.color;
-            document.getElementById('currentCover').removeAttribute('src');
+            const currentCover = document.getElementById('currentCover');
+            const nextCover = document.getElementById('nextCover');
+            
+            if (currentAlbum.artwork) {
+                currentCover.style.backgroundImage = `url(${currentAlbum.artwork})`;
+                currentCover.style.backgroundSize = 'cover';
+                currentCover.style.backgroundPosition = 'center';
+            } else {
+                currentCover.style.background = currentAlbum.color;
+            }
+            
+            if (nextAlbum.artwork) {
+                nextCover.style.backgroundImage = `url(${nextAlbum.artwork})`;
+                nextCover.style.backgroundSize = 'cover';
+                nextCover.style.backgroundPosition = 'center';
+            } else {
+                nextCover.style.background = nextAlbum.color;
+            }
+            
             document.getElementById('currentTitle').textContent = currentAlbum.title;
             document.getElementById('currentArtist').textContent = currentAlbum.artist;
             document.getElementById('currentRating').textContent = currentAlbum.rating.toFixed(1);
 
-            document.getElementById('nextCover').style.background = nextAlbum.color;
-            document.getElementById('nextCover').removeAttribute('src');
             document.getElementById('nextTitle').textContent = nextAlbum.title;
             document.getElementById('nextArtist').textContent = nextAlbum.artist;
             document.getElementById('nextRating').textContent = '?';
