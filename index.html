@@ -1,141 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Higher or Lower: Album Ratings</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #121212;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      flex-direction: column;
-    }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #121212;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex-direction: column;
+  }
 
-    .game-container {
-      background: #181818;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      max-width: 1000px;
-      width: 100%;
-      overflow: hidden;
-    }
+  .game-container {
+    background: #181818;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    max-width: 1000px;
+    width: 100%;
+    overflow: hidden;
+  }
 
-    .header {
-      background: #1DB954;
-      color: white;
-      padding: 25px;
-      text-align: center;
-    }
+  .header {
+    background: #1DB954;
+    color: white;
+    padding: 25px;
+    text-align: center;
+  }
 
-    .header h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
+  .header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
 
-    .score-board {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 15px;
-    }
+  .score-board {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+  }
 
-    .score-item {
-      font-size: 1.1em;
-    }
+  .score-item {
+    font-size: 1.1em;
+  }
 
-    .score-item strong {
-      font-size: 1.3em;
-    }
+  .score-item strong {
+    font-size: 1.3em;
+  }
 
-    .game-board {
-      display: flex;
-      min-height: 500px;
-      position: relative;
-    }
+  .game-board {
+    display: flex;
+    min-height: 500px;
+    position: relative;
+  }
 
-    .album-card {
-      flex: 1;
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
+  .album-card {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
 
-    .current-album {
-      background: #282828;
-      border-right: 3px solid #1DB954;
-    }
+  .current-album {
+    background: #282828;
+    border-right: 3px solid #1DB954;
+  }
 
-    .next-album {
-      background: #282828;
-    }
+  .next-album {
+    background: #282828;
+  }
 
-    .album-cover {
-      width: 160px; /* smaller */
-      height: 160px; /* smaller */
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      margin-bottom: 20px;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
+  .album-cover {
+    width: 160px;
+    height: 160px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+  }
 
-    .album-cover:hover {
-      transform: scale(1.05);
-    }
+  .album-cover:hover {
+    transform: scale(1.05);
+  }
 
-    .album-cover::after {
-      content: '🎵 Listen on Spotify';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(29, 185, 84, 0.95);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 0.9em;
-      border-radius: 15px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+  .album-cover::after {
+    content: '🎵 Listen on Spotify';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(29, 185, 84, 0.95);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
 
-    .album-cover:hover::after {
-      opacity: 1;
-    }
+  .album-cover:hover::after {
+    opacity: 1;
+  }
 
-    .album-info {
-      text-align: center;
-      max-width: 250px;
-    }
+  .album-info {
+    text-align: center;
+    max-width: 250px;
+  }
 
-    .album-title {
-      font-size: 1.4em;
-      font-weight: bold;
-      margin-bottom: 8px;
-      color: #FFFFFF;
-    }
+  .album-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #FFFFFF;
+  }
 
-    .album-artist {
-      font-size: 1em;
-      color: #B3B3B3;
-      margin-bottom: 15
+  .album-artist {
+    font-size: 1em;
+    color: #B3B3B3;
+    margin-bottom: 15px;
+  }
+</style>
+
