@@ -1,10 +1,6 @@
-</div>
-</body>
-</html>
-
 <!-- ============================================ -->
-<!-- FILE: about.html (ABOUT PAGE)              -->
-<!-- Information about modern music history     -->
+<!-- FILE: index.html (HOMEPAGE)                -->
+<!-- This is the main landing page              -->
 <!-- ============================================ -->
 
 <!DOCTYPE html>
@@ -12,7 +8,688 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Modern Music History</title>
+    <title>Modern Music History - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background-color: #764ba2;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            color: white;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Content sections */
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .content h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+        }
+
+        .content h3 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">Trivia</a></li>
+            <li><a href="projects.html">Albums</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🎵 Modern Music History 🎵</h1>
+            <p>Exploring the Evolution of Sound from the 20th Century to Today</p>
+        </header>
+
+        <div class="content">
+            <h2>Welcome to Modern Music History</h2>
+            <p>Music has undergone incredible transformations over the past century. From the birth of jazz and blues to the digital revolution of today, modern music reflects our culture, technology, and social movements.</p>
+
+            <h3>The Evolution of Modern Music</h3>
+            <p>The 20th century saw music evolve from acoustic instruments to electric guitars, synthesizers, and now digital production. Each decade brought new genres: rock 'n' roll in the 1950s, psychedelic rock in the 1960s, disco and punk in the 1970s, hip-hop and electronic music in the 1980s, grunge and alternative rock in the 1990s, and the digital streaming revolution of the 2000s onward.</p>
+
+            <h3>Why Music History Matters</h3>
+            <p>Understanding music history helps us appreciate how artists have pushed boundaries, challenged norms, and created soundtracks to our lives. Every song tells a story, and every genre represents a movement, a feeling, or a rebellion.</p>
+
+            <p>Explore our site to learn more about the artists, albums, and moments that shaped modern music!</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Modern Music History. Created for music lovers everywhere.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+<!-- ============================================ -->
+<!-- FILE: about.html (MUSIC TRIVIA GAME)       -->
+<!-- Interactive trivia with background music   -->
+<!-- ============================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Trivia - Modern Music History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background-color: #764ba2;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Music Player */
+        .music-player {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .music-player button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .music-player button:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .music-player p {
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Trivia Game */
+        .trivia-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .question-container {
+            margin-bottom: 2rem;
+        }
+
+        .question {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .album-preview {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .album-preview img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: white;
+            border: 3px solid #667eea;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            color: #333;
+        }
+
+        .option-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .option-btn.correct {
+            background: #51cf66;
+            border-color: #51cf66;
+            color: white;
+        }
+
+        .option-btn.incorrect {
+            background: #ff6b6b;
+            border-color: #ff6b6b;
+            color: white;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .next-btn {
+            background: #764ba2;
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            display: block;
+            margin: 2rem auto 0;
+            transition: all 0.3s ease;
+        }
+
+        .next-btn:hover {
+            background: #667eea;
+            transform: scale(1.05);
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #667eea;
+            padding: 3rem;
+        }
+
+        .game-over {
+            text-align: center;
+        }
+
+        .game-over h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-over p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .restart-btn {
+            background: #51cf66;
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .restart-btn:hover {
+            background: #40c057;
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .question {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">Trivia</a></li>
+            <li><a href="projects.html">Albums</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🎵 Music Trivia Challenge 🎵</h1>
+        </header>
+
+        <!-- Background Music Player -->
+        <div class="music-player">
+            <button id="playMusic">🎵 Play Background Music</button>
+            <button id="stopMusic">⏸️ Stop Music</button>
+            <p id="musicStatus">Click play to start some chill background music!</p>
+        </div>
+
+        <!-- Trivia Game -->
+        <div class="trivia-container">
+            <div class="score">Score: <span id="score">0</span> / <span id="total">0</span></div>
+            <div id="gameContent">
+                <div class="loading">🎸 Loading music trivia...</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Modern Music History. Powered by Music Knowledge</p>
+        </footer>
+    </div>
+
+    <script>
+        // Background Music using Web Audio API
+        let audioContext;
+        let oscillator;
+        let gainNode;
+        let isPlaying = false;
+
+        function initAudio() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            gainNode = audioContext.createGain();
+            gainNode.gain.value = 0.1;
+            gainNode.connect(audioContext.destination);
+        }
+
+        function playBackgroundMusic() {
+            if (!audioContext) initAudio();
+            
+            if (isPlaying) return;
+            
+            // Create a simple ambient melody
+            oscillator = audioContext.createOscillator();
+            oscillator.type = 'sine';
+            oscillator.frequency.value = 220;
+            
+            const filter = audioContext.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.value = 800;
+            
+            oscillator.connect(filter);
+            filter.connect(gainNode);
+            
+            oscillator.start();
+            isPlaying = true;
+            
+            document.getElementById('musicStatus').textContent = '🎵 Music playing...';
+        }
+
+        function stopBackgroundMusic() {
+            if (oscillator && isPlaying) {
+                oscillator.stop();
+                isPlaying = false;
+                document.getElementById('musicStatus').textContent = 'Music stopped';
+            }
+        }
+
+        document.getElementById('playMusic').addEventListener('click', playBackgroundMusic);
+        document.getElementById('stopMusic').addEventListener('click', stopBackgroundMusic);
+
+        // Trivia Game
+        let currentQuestion = 0;
+        let score = 0;
+        const totalQuestions = 5;
+        let questions = [];
+
+        // Sample questions
+        const triviaQuestions = [
+            {
+                question: "Which band released the album 'OK Computer' in 1997?",
+                options: ["Radiohead", "Coldplay", "Muse", "The Strokes"],
+                correct: 0,
+                artwork: "https://via.placeholder.com/200/667eea/ffffff?text=OK+Computer"
+            },
+            {
+                question: "Who is known as the 'King of Pop'?",
+                options: ["Prince", "Elvis Presley", "Michael Jackson", "Freddie Mercury"],
+                correct: 2,
+                artwork: "https://via.placeholder.com/200/764ba2/ffffff?text=King+of+Pop"
+            },
+            {
+                question: "Which album features the song 'Bohemian Rhapsody'?",
+                options: ["A Day at the Races", "Jazz", "A Night at the Opera", "News of the World"],
+                correct: 2,
+                artwork: "https://via.placeholder.com/200/667eea/ffffff?text=Queen"
+            },
+            {
+                question: "What year was hip-hop born in the Bronx?",
+                options: ["1969", "1973", "1977", "1981"],
+                correct: 1,
+                artwork: "https://via.placeholder.com/200/764ba2/ffffff?text=Hip-Hop"
+            },
+            {
+                question: "Which artist released the album 'To Pimp a Butterfly'?",
+                options: ["Drake", "J. Cole", "Kendrick Lamar", "Kanye West"],
+                correct: 2,
+                artwork: "https://via.placeholder.com/200/667eea/ffffff?text=TPAB"
+            }
+        ];
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function startGame() {
+            questions = shuffleArray(triviaQuestions).slice(0, totalQuestions);
+            currentQuestion = 0;
+            score = 0;
+            updateScore();
+            showQuestion();
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = totalQuestions;
+        }
+
+        function showQuestion() {
+            if (currentQuestion >= questions.length) {
+                showGameOver();
+                return;
+            }
+
+            const question = questions[currentQuestion];
+            const gameContent = document.getElementById('gameContent');
+
+            gameContent.innerHTML = `
+                <div class="question-container">
+                    <div class="question">Question ${currentQuestion + 1} of ${totalQuestions}</div>
+                    <div class="album-preview">
+                        <img src="${question.artwork}" alt="Album artwork">
+                    </div>
+                    <div class="question">${question.question}</div>
+                    <div class="options" id="options"></div>
+                </div>
+            `;
+
+            const optionsContainer = document.getElementById('options');
+            question.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = questions[currentQuestion];
+            const buttons = document.querySelectorAll('.option-btn');
+            
+            buttons.forEach((btn, index) => {
+                btn.disabled = true;
+                if (index === question.correct) {
+                    btn.classList.add('correct');
+                } else if (index === selectedIndex && selectedIndex !== question.correct) {
+                    btn.classList.add('incorrect');
+                }
+            });
+
+            if (selectedIndex === question.correct) {
+                score++;
+                updateScore();
+            }
+
+            // Show next button
+            const gameContent = document.getElementById('gameContent');
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'next-btn';
+            nextBtn.textContent = currentQuestion < questions.length - 1 ? 'Next Question →' : 'See Results';
+            nextBtn.onclick = () => {
+                currentQuestion++;
+                showQuestion();
+            };
+            gameContent.appendChild(nextBtn);
+        }
+
+        function showGameOver() {
+            const gameContent = document.getElementById('gameContent');
+            const percentage = Math.round((score / totalQuestions) * 100);
+            
+            let message = '';
+            if (percentage === 100) message = '🎉 Perfect! You\'re a music genius!';
+            else if (percentage >= 80) message = '🎸 Excellent! You know your music!';
+            else if (percentage >= 60) message = '🎵 Good job! Keep learning!';
+            else message = '🎼 Keep exploring music history!';
+
+            gameContent.innerHTML = `
+                <div class="game-over">
+                    <h2>Game Over!</h2>
+                    <p>You scored ${score} out of ${totalQuestions}</p>
+                    <p>${message}</p>
+                    <p style="font-size: 3rem; margin: 1rem 0;">${percentage}%</p>
+                    <button class="restart-btn" onclick="startGame()">🔄 Play Again</button>
+                </div>
+            `;
+        }
+
+        // Start the game when page loads
+        setTimeout(startGame, 500);
+    </script>
+</body>
+</html>
+
+<!-- ============================================ -->
+<!-- FILE: projects.html (GALLERY PAGE)         -->
+<!-- Album of the Day gallery with 3 albums     -->
+<!-- ============================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums - Modern Music History</title>
     <style>
         * {
             margin: 0;
@@ -182,7 +859,7 @@
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="about.html">Trivia</a></li>
             <li><a href="projects.html" class="active">Albums</a></li>
         </ul>
     </nav>
@@ -195,6 +872,17 @@
 
         <div class="gallery">
             <div class="album-card">
+                <img src="assets/pic2.jpg" alt="N.E.R.D - Seeing Sounds Album Cover">
+                <div class="album-info">
+                    <span class="featured-badge">Album of the Day</span>
+                    <h3>Seeing Sounds</h3>
+                    <p class="artist">N.E.R.D</p>
+                    <p class="year">2008</p>
+                    <p>Pharrell Williams and Chad Hugo pushed creative boundaries with this genre-defying album. Mixing rock, funk, hip-hop, and electronic music, "Seeing Sounds" represents the experimental spirit of modern music production and the freedom to blend any sound imaginable.</p>
+                </div>
+            </div>
+
+            <div class="album-card">
                 <img src="assets/pic1.jpg" alt="Radiohead - Hail to the Thief Album Cover">
                 <div class="album-info">
                     <span class="featured-badge">Album of the Day</span>
@@ -206,460 +894,15 @@
             </div>
 
             <div class="album-card">
-                <img src="assets/pic2.jpg" alt="LCD Soundsystem - Seeing Sounds Album">
+                <img src="assets/pic3.jpg" alt="JPEGMAFIA - LP! Album Cover">
                 <div class="album-info">
                     <span class="featured-badge">Album of the Day</span>
-                    <h3>Seeing Sounds</h3>
-                    <p class="artist">N.E.R.D</p>
-                    <p class="year">2008</p>
-                    <p>Pharrell Williams and Chad Hugo pushed creative boundaries with this genre-defying album. Mixing rock, funk, hip-hop, and electronic music, "Seeing Sounds" represents the experimental spirit of modern music production and the freedom to blend any sound imaginable.</p>
+                    <h3>LP!</h3>
+                    <p class="artist">JPEGMAFIA</p>
+                    <p class="year">2021</p>
+                    <p>An explosive and experimental hip-hop project that showcases JPEGMAFIA's abrasive production style and uncompromising artistic vision. This album pushes boundaries with its chaotic energy, blending industrial sounds, glitchy beats, and raw lyricism that challenges conventional hip-hop norms.</p>
                 </div>
             </div>
-
-            <div class="album-card">
-                <img src="assets/pic3.jpg" alt="Kendrick Lamar Liquor Store Album Photo">
-                <div class="album-info">
-                    <span class="featured-badge">Album of the Day</span>
-                    <h3>Good Kid, M.A.A.D City</h3>
-                    <p class="artist">Kendrick Lamar</p>
-                    <p class="year">2012</p>
-                    <p>A cinematic journey through Compton that redefined hip-hop storytelling. Kendrick crafted a concept album that's both deeply personal and universally resonant, addressing themes of street life, family, and redemption. This album solidified hip-hop as modern poetry.</p>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <p>&copy; 2025 Modern Music History. Created for music lovers everywhere.</p>
-        </footer>
-    </div>
-</body>
-</html>: 15px;
-            margin-bottom: 2rem;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .content {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .content h2 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-            border-bottom: 3px solid #764ba2;
-            padding-bottom: 0.5rem;
-        }
-
-        .content h3 {
-            color: #764ba2;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-            font-size: 1.5rem;
-        }
-
-        .content p {
-            margin-bottom: 1rem;
-            text-align: justify;
-        }
-
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline-item {
-            margin-bottom: 2rem;
-            padding-left: 2rem;
-            border-left: 3px solid #667eea;
-        }
-
-        .timeline-item h3 {
-            background: #667eea;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: white;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" class="active">About</a></li>
-            <li><a href="projects.html">Albums</a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        <header>
-            <h1>📚 About Modern Music 📚</h1>
-        </header>
-
-        <div class="content">
-            <h2>The Story of Modern Music</h2>
-            <p>Modern music history is a rich tapestry woven from countless genres, innovations, and cultural movements. It represents more than just sound—it's a reflection of society's hopes, struggles, and transformations.</p>
-
-            <h2>Timeline of Modern Music</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h3>1950s - Birth of Rock 'n' Roll</h3>
-                    <p>Artists like Elvis Presley, Chuck Berry, and Little Richard revolutionized popular music, blending blues, country, and rhythm to create rock 'n' roll. This decade marked the beginning of youth culture and rebellion through music.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <h3>1960s - The British Invasion & Counterculture</h3>
-                    <p>The Beatles, The Rolling Stones, and Bob Dylan dominated the scene. Music became a vehicle for social change, with protest songs addressing civil rights and anti-war sentiments. Psychedelic rock pushed creative boundaries.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <h3>1970s - Disco, Punk & Album Rock</h3>
-                    <p>Diverse sounds emerged: disco's dance floors, punk's raw rebellion, and progressive rock's ambitious concepts. Artists like Led Zeppelin, Pink Floyd, and David Bowie created iconic albums that defined the era.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <h3>1980s - MTV & Hip-Hop Rise</h3>
-                    <p>Music videos became crucial with MTV's launch. Hip-hop emerged from the Bronx to become a global phenomenon. Electronic music and synthesizers shaped pop music through artists like Michael Jackson, Madonna, and Prince.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <h3>1990s - Alternative Rock & Digital Production</h3>
-                    <p>Grunge, alternative rock, and hip-hop dominated. Nirvana, Pearl Jam, Tupac, and The Notorious B.I.G. became cultural icons. Digital recording technology began transforming music production.</p>
-                </div>
-
-                <div class="timeline-item">
-                    <h3>2000s-Present - Digital Revolution</h3>
-                    <p>The internet, streaming services, and social media completely transformed how music is created, distributed, and consumed. Genres blend freely, and independent artists can reach global audiences instantly.</p>
-                </div>
-            </div>
-
-            <h2>The Impact of Technology</h2>
-            <p>From vinyl records to streaming platforms, technology has continuously shaped music. The electric guitar, synthesizers, drum machines, samplers, and digital audio workstations have all expanded creative possibilities. Today, anyone with a laptop can produce professional-quality music.</p>
-
-            <h2>Music as Cultural Expression</h2>
-            <p>Throughout modern history, music has given voice to movements and communities. It has challenged social norms, celebrated diversity, and brought people together across boundaries of race, class, and nationality.</p>
-        </div>
-
-        <footer>
-            <p>&copy; 2025 Modern Music History. Created for music lovers everywhere.</p>
-        </footer>
-    </div>
-</body>
-</html>
-
-<!-- ============================================ -->
-<!-- FILE: projects.html (GALLERY PAGE)         -->
-<!-- Album of the Day gallery with 3 albums     -->
-<!-- ============================================ -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums - Modern Music History</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        nav {
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: #667eea;
-            transform: translateY(-2px);
-        }
-
-        nav a.active {
-            background-color: #764ba2;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            padding: 3rem 2rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius<!-- ============================================ -->
-<!-- FILE: index.html (HOMEPAGE)                -->
-<!-- This is the main landing page              -->
-<!-- ============================================ -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Music History - Home</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        /* Navigation */
-        nav {
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: #667eea;
-            transform: translateY(-2px);
-        }
-
-        nav a.active {
-            background-color: #764ba2;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            color: white;
-            padding: 3rem 2rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            margin-bottom: 2rem;
-        }
-
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        header p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-        }
-
-        /* Content sections */
-        .content {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .content h2 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 2rem;
-            border-bottom: 3px solid #764ba2;
-            padding-bottom: 0.5rem;
-        }
-
-        .content h3 {
-            color: #764ba2;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-            font-size: 1.5rem;
-        }
-
-        .content p {
-            margin-bottom: 1rem;
-            text-align: justify;
-        }
-
-        /* Gallery Grid */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .album-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .album-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .album-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .album-info {
-            padding: 1.5rem;
-        }
-
-        .album-info h3 {
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .album-info p {
-            color: #666;
-            margin-bottom: 0.3rem;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: white;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            margin-top: 2rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="projects.html">Albums</a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        <header>
-            <h1>🎵 Modern Music History 🎵</h1>
-            <p>Exploring the Evolution of Sound from the 20th Century to Today</p>
-        </header>
-
-        <div class="content">
-            <h2>Welcome to Modern Music History</h2>
-            <p>Music has undergone incredible transformations over the past century. From the birth of jazz and blues to the digital revolution of today, modern music reflects our culture, technology, and social movements.</p>
-
-            <h3>The Evolution of Modern Music</h3>
-            <p>The 20th century saw music evolve from acoustic instruments to electric guitars, synthesizers, and now digital production. Each decade brought new genres: rock 'n' roll in the 1950s, psychedelic rock in the 1960s, disco and punk in the 1970s, hip-hop and electronic music in the 1980s, grunge and alternative rock in the 1990s, and the digital streaming revolution of the 2000s onward.</p>
-
-            <h3>Why Music History Matters</h3>
-            <p>Understanding music history helps us appreciate how artists have pushed boundaries, challenged norms, and created soundtracks to our lives. Every song tells a story, and every genre represents a movement, a feeling, or a rebellion.</p>
-
-            <p>Explore our site to learn more about the artists, albums, and moments that shaped modern music!</p>
         </div>
 
         <footer>
