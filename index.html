@@ -1,138 +1,220 @@
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+<!-- ============================================ -->
+<!-- FILE: index.html (HOMEPAGE)                -->
+<!-- This is the main landing page              -->
+<!-- ============================================ -->
 
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #121212;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    flex-direction: column;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Music History - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  .game-container {
-    background: #181818;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    max-width: 1000px;
-    width: 100%;
-    overflow: hidden;
-  }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
 
-  .header {
-    background: #1DB954;
-    color: white;
-    padding: 25px;
-    text-align: center;
-  }
+        /* Navigation */
+        nav {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
 
-  .header h1 {
-    font-size: 2em;
-    margin-bottom: 10px;
-  }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
 
-  .score-board {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 15px;
-  }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
 
-  .score-item {
-    font-size: 1.1em;
-  }
+        nav a:hover {
+            background-color: #667eea;
+            transform: translateY(-2px);
+        }
 
-  .score-item strong {
-    font-size: 1.3em;
-  }
+        nav a.active {
+            background-color: #764ba2;
+        }
 
-  .game-board {
-    display: flex;
-    min-height: 500px;
-    position: relative;
-  }
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-  .album-card {
-    flex: 1;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
+        /* Header */
+        header {
+            text-align: center;
+            color: white;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
 
-  .current-album {
-    background: #282828;
-    border-right: 3px solid #1DB954;
-  }
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
 
-  .next-album {
-    background: #282828;
-  }
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
 
-  .album-cover {
-    width: 160px;
-    height: 160px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-  }
+        /* Content sections */
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
 
-  .album-cover:hover {
-    transform: scale(1.05);
-  }
+        .content h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+        }
 
-  .album-cover::after {
-    content: '🎵 Listen on Spotify';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(29, 185, 84, 0.95);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.9em;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
+        .content h3 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
 
-  .album-cover:hover::after {
-    opacity: 1;
-  }
+        .content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
 
-  .album-info {
-    text-align: center;
-    max-width: 250px;
-  }
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
 
-  .album-title {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #FFFFFF;
-  }
+        .album-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
 
-  .album-artist {
-    font-size: 1em;
-    color: #B3B3B3;
-    margin-bottom: 15px;
-  }
-</style>
+        .album-card:hover {
+            transform: translateY(-10px);
+        }
 
+        .album-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .album-info {
+            padding: 1.5rem;
+        }
+
+        .album-info h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .album-info p {
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Albums</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🎵 Modern Music History 🎵</h1>
+            <p>Exploring the Evolution of Sound from the 20th Century to Today</p>
+        </header>
+
+        <div class="content">
+            <h2>Welcome to Modern Music History</h2>
+            <p>Music has undergone incredible transformations over the past century. From the birth of jazz and blues to the digital revolution of today, modern music reflects our culture, technology, and social movements.</p>
+
+            <h3>The Evolution of Modern Music</h3>
+            <p>The 20th century saw music evolve from acoustic instruments to electric guitars, synthesizers, and now digital production. Each decade brought new genres: rock 'n' roll in the 1950s, psychedelic rock in the 1960s, disco and punk in the 1970s, hip-hop and electronic music in the 1980s, grunge and alternative rock in the 1990s, and the digital streaming revolution of the 2000s onward.</p>
+
+            <h3>Why Music History Matters</h3>
+            <p>Understanding music history helps us appreciate how artists have pushed boundaries, challenged norms, and created soundtracks to our lives. Every song tells a story, and every genre represents a movement, a feeling, or a rebellion.</p>
+
+            <p>Explore our site to learn more about the artists, albums, and moments that shaped modern music!</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Modern Music History. Created for music lovers everywhere.</p>
+        </footer>
+    </div>
+</body>
+</html>
