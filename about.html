@@ -1,4 +1,454 @@
+</div>
+</body>
+</html>
+
 <!-- ============================================ -->
+<!-- FILE: about.html (MUSIC TRIVIA GAME)       -->
+<!-- Interactive trivia using Apple Music API   -->
+<!-- ============================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Trivia - Modern Music History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background-color: #764ba2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .album-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .album-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .album-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .album-info {
+            padding: 1.5rem;
+        }
+
+        .album-info h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .album-info .artist {
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .album-info .year {
+            color: #888;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .album-info p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .featured-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html" class="active">Albums</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🎸 Album of the Day 🎸</h1>
+            <p>Celebrating Iconic Albums That Shaped Modern Music</p>
+        </header>
+
+        <div class="gallery">
+            <div class="album-card">
+                <img src="assets/pic1.jpg" alt="Radiohead - Hail to the Thief Album Cover">
+                <div class="album-info">
+                    <span class="featured-badge">Album of the Day</span>
+                    <h3>Hail to the Thief</h3>
+                    <p class="artist">Radiohead</p>
+                    <p class="year">2003</p>
+                    <p>A politically charged masterpiece blending electronic experimentation with rock elements. This album captures the anxiety and paranoia of the early 2000s with tracks like "2+2=5" and "There There," showcasing Radiohead's ability to merge art and social commentary.</p>
+                </div>
+            </div>
+
+            <div class="album-card">
+                <img src="assets/pic2.jpg" alt="LCD Soundsystem - Seeing Sounds Album">
+                <div class="album-info">
+                    <span class="featured-badge">Album of the Day</span>
+                    <h3>Seeing Sounds</h3>
+                    <p class="artist">N.E.R.D</p>
+                    <p class="year">2008</p>
+                    <p>Pharrell Williams and Chad Hugo pushed creative boundaries with this genre-defying album. Mixing rock, funk, hip-hop, and electronic music, "Seeing Sounds" represents the experimental spirit of modern music production and the freedom to blend any sound imaginable.</p>
+                </div>
+            </div>
+
+            <div class="album-card">
+                <img src="assets/pic3.jpg" alt="Kendrick Lamar Liquor Store Album Photo">
+                <div class="album-info">
+                    <span class="featured-badge">Album of the Day</span>
+                    <h3>Good Kid, M.A.A.D City</h3>
+                    <p class="artist">Kendrick Lamar</p>
+                    <p class="year">2012</p>
+                    <p>A cinematic journey through Compton that redefined hip-hop storytelling. Kendrick crafted a concept album that's both deeply personal and universally resonant, addressing themes of street life, family, and redemption. This album solidified hip-hop as modern poetry.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Modern Music History. Created for music lovers everywhere.</p>
+        </footer>
+    </div>
+</body>
+</html>: 15px;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .content h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #764ba2;
+            padding-bottom: 0.5rem;
+        }
+
+        .content h3 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            border-left: 3px solid #667eea;
+        }
+
+        .timeline-item h3 {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="projects.html">Albums</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>📚 About Modern Music 📚</h1>
+        </header>
+
+        <div class="content">
+            <h2>The Story of Modern Music</h2>
+            <p>Modern music history is a rich tapestry woven from countless genres, innovations, and cultural movements. It represents more than just sound—it's a reflection of society's hopes, struggles, and transformations.</p>
+
+            <h2>Timeline of Modern Music</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>1950s - Birth of Rock 'n' Roll</h3>
+                    <p>Artists like Elvis Presley, Chuck Berry, and Little Richard revolutionized popular music, blending blues, country, and rhythm to create rock 'n' roll. This decade marked the beginning of youth culture and rebellion through music.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>1960s - The British Invasion & Counterculture</h3>
+                    <p>The Beatles, The Rolling Stones, and Bob Dylan dominated the scene. Music became a vehicle for social change, with protest songs addressing civil rights and anti-war sentiments. Psychedelic rock pushed creative boundaries.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>1970s - Disco, Punk & Album Rock</h3>
+                    <p>Diverse sounds emerged: disco's dance floors, punk's raw rebellion, and progressive rock's ambitious concepts. Artists like Led Zeppelin, Pink Floyd, and David Bowie created iconic albums that defined the era.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>1980s - MTV & Hip-Hop Rise</h3>
+                    <p>Music videos became crucial with MTV's launch. Hip-hop emerged from the Bronx to become a global phenomenon. Electronic music and synthesizers shaped pop music through artists like Michael Jackson, Madonna, and Prince.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>1990s - Alternative Rock & Digital Production</h3>
+                    <p>Grunge, alternative rock, and hip-hop dominated. Nirvana, Pearl Jam, Tupac, and The Notorious B.I.G. became cultural icons. Digital recording technology began transforming music production.</p>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>2000s-Present - Digital Revolution</h3>
+                    <p>The internet, streaming services, and social media completely transformed how music is created, distributed, and consumed. Genres blend freely, and independent artists can reach global audiences instantly.</p>
+                </div>
+            </div>
+
+            <h2>The Impact of Technology</h2>
+            <p>From vinyl records to streaming platforms, technology has continuously shaped music. The electric guitar, synthesizers, drum machines, samplers, and digital audio workstations have all expanded creative possibilities. Today, anyone with a laptop can produce professional-quality music.</p>
+
+            <h2>Music as Cultural Expression</h2>
+            <p>Throughout modern history, music has given voice to movements and communities. It has challenged social norms, celebrated diversity, and brought people together across boundaries of race, class, and nationality.</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Modern Music History. Created for music lovers everywhere.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
+<!-- ============================================ -->
+<!-- FILE: projects.html (GALLERY PAGE)         -->
+<!-- Album of the Day gallery with 3 albums     -->
+<!-- ============================================ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums - Modern Music History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        nav a.active {
+            background-color: #764ba2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 3rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius<!-- ============================================ -->
 <!-- FILE: index.html (HOMEPAGE)                -->
 <!-- This is the main landing page              -->
 <!-- ============================================ -->
